@@ -33,5 +33,4 @@ export LANG=C
 grep -rl -v "char& operator\[\]" ./* | grep -v cs14_grading | xargs -I{} sed -i '' s/char\&/char/ {}
 
 #Makes extensions uniform
-find . -iname "*.H" -exec bash -c 'mv "$0" "${0%\.H}.hpp"' {} \;
-find . -iname "*.h" -exec bash -c 'mv "$0" "${0%\.h}.hpp"' {} \;
+find . -iname "*.H$" -exec bash -c 'mv "$0" "${0%\.H}.h"' {} \;

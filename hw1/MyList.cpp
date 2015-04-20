@@ -1,6 +1,6 @@
 #include <boost/python.hpp>
 #include <iostream>
-#include "MyList.hpp"
+#include "MyList.h"
 
 using namespace boost::python;
 
