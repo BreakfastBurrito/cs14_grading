@@ -13,7 +13,8 @@ void assignMyList(MyList& self, const MyList& other)
 }
 BOOST_PYTHON_MODULE(MyList)
 {
-  class_<MyList>("MyList", init<std::string>())
+  class_<MyList>("MyList")
+      .def(init<std::string>())
       .def(init<MyList::MyList>())
       .def("print_list", &MyList::print)
       .def("__getitem__", &MyList::operator[])
