@@ -4,15 +4,25 @@ import re
 # default constructor
 def test_default_constructor():
     def_constructor = MyList()
+    assert def_constructor.size() == 0
 
 # copy constructor
-def test_copy_constructor():
+def test_copy_constructor_len():
+    copy_from = MyList("original")
+    copy_to = MyList(copy_from)
+    assert len(copy_from) == 8 and len(copy_to) == 8
+
+# copy constructor
+def test_copy_constructor_diff():
+    copy_from = MyList("original")
+    copy_to = MyList(copy_from)
+    copy_to.push_front('a')
+    assert len(copy_from) == 9 and len(copy_to) == 8
 
 # Test string constructor
 def test_string_constructor():
     str_constructor = MyList("I am a string")
     assert str_constructor.size() == len("I am a string")
-
 
 ## Test char* constructor
 #def test_char_constructor():
@@ -21,41 +31,60 @@ def test_string_constructor():
 #def test_destructor():
 
 ## push_front on empty
-def test_push_front(capsys):
+def test_push_front_empty(capsys):
     test_pf = MyList("world")
-    test_pf.push_front(' ')
-    test_pf.push_front('o')
-    test_pf.push_front('l')
-    test_pf.push_front('l')
-    test_pf.push_front('e')
-    test_pf.push_front('h')
+    for ch in "elloh":
+        push_front(ch)
 
-    test_pb.print_list()
+    test_pf.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
-    assert only_chars == "hello world"
+    assert only_chars == "helloworld"
+
+# push_front non empty
+def test_push_front_nonempty(capsys):
+    test_pf = MyList()
+    for ch in "elloh":
+        push_front(ch)
+
+    test_pf.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "hello"
 
 # push_back on empty
-def test_push_back(capsys):
+def test_push_back_nonempty(capsys):
     test_pb = MyList("hello")
-    test_pb.push_back(' ')
-    test_pb.push_back('w')
-    test_pb.push_back('o')
-    test_pb.push_back('r')
-    test_pb.push_back('l')
-    test_pb.push_back('d')
+    for ch in "world":
+        test_pb.push_back(ch)
 
     test_pb.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
-    assert only_chars == "hello world"
+    assert only_chars == "helloworld"
 
-## pop_front on empty
-def test_pop_front(capsys):
+# push_back on empty
+def test_push_back_empty(capsys):
+    test_pb = MyList()
+    for ch in "abc":
+        test_pb.push_back(ch)
+
+    test_pb.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "abc"
+
+# pop_front on empty
+def test_pop_front_empty(capsys):
+    test_popf = MyList()
+    test_popf.pop_front()
+    assert only_chars == "ping"
+
+# pop_front on empty
+def test_pop_front_nonempty(capsys):
     test_popf = MyList("popping")
-    test_popf.pop_front()
-    test_popf.pop_front()
-    test_popf.pop_front()
+    for _ in xrange(3):
+        test_popf.pop_front()
 
     test_popf.print_list()
     out, err = capfd.readouterr()
@@ -63,24 +92,77 @@ def test_pop_front(capsys):
     assert only_chars == "ping"
 
 # pop_back empty
-def test_pop_back(capsys):
-    test_popb = MyList("popping")
-    test_popb.pop_front()
-    test_popb.pop_front()
-    test_popb.pop_front()
+def test_pop_back_empty(capsys):
+    test_popb = MyList()
+    test_popb.pop_back()
+    assert only_chars == "pop"
+
+# pop_back empty
+def test_pop_back_nonempty(capsys):
+    test_popb = MyList(popping")
+    for _ in xrange(4):
+        test_popb.pop_back()
 
     test_popb.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "pop"
 
-## swap valid i valid j
-#def test_swap():
+# swap valid i valid j
+def test_swap_both_valid(capsys):
+    swap_me = MyList("swap")
+    swap_me.swap(1,2)
+
+    test_rev.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "sawp"
+
+# swap invalid i valid j
+def test_swap_invalid_i(capsys):
+    swap_me = MyList("swap")
+    swap_me.swap(8,2)
+
+    test_rev.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "swap"
+
+# swap valid i invalid j
+def test_swap_invalid_j(capsys):
+    swap_me = MyList("swap")
+    swap_me.swap(1,10)
+
+    test_rev.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "swap"
+
+# swap both invalid
+def test_swap_both_invalid(capsys):
+    swap_me = MyList("swap")
+    swap_me.swap(-1,200)
+
+    test_rev.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "swap"
+
+# swap on empty list
+def test_swap_on_empty(capfd):
+    empty = MyList()
+    empty(1, 2)
 
 ## insert at valid i
-#def test_insert_at_pos():
+def test_insert_at_pos_valid(capfd):
+    my_list = MyList("testing")
+    my_list.insert_at_pos(2,'a')
+    my_list.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "teasting"
 
-# reverse
+# reverse nonempty
 def test_reverse(capsys):
     test_rev = MyList("reverse")
     test_rev.revese()
@@ -89,6 +171,16 @@ def test_reverse(capsys):
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "esrever"
+
+# reverse empty
+def test_reverse(capsys):
+    test_rev = MyList()
+    test_rev.revese()
+
+    test_rev.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == ""
 
 # size
 def test_size():
@@ -190,7 +282,6 @@ def test_addition_operator_mem_check():
     only_chars = "".join(re.findall('([a-z])', out))
 
     assert only_chars == "abcdef"
-
 
 # print
 def test_print(capfd):
