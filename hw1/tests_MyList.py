@@ -95,11 +95,105 @@ def test_size():
     test_list_size = MyList("abcdefghij")
     assert test_list_size.size() == 10
 
-# operator [  ]
-#def test_brackets(capsys):
+def test_find_valid_char():
+    test_string = MyList("test string")
+    assert test_string.find_MyList("r") == 7
+
+def test_find_invalid_char():
+    test_string = MyList("test string")
+    assert test_string.find_MyList("r") == -1
+
+def test_find_empty_list():
+    test_string = MyList()
+    assert test_string.find_MyList("r") == -1
+
+
+def test_find_valid_MyList():
+    test_string = MyList("test string")
+    assert test_string.find_MyList(MyList("rin")) == 7
+
+def test_find_invalid_MyList():
+    test_string = MyList("test string")
+    assert test_string.find_MyList(MyList("zoo")) == -1
+
+def test_find_empty_list_MyList():
+    test_string = MyList()
+    assert test_string.find_MyList(MyList("test")) == -1
+
+def test_equals_operator_empty(capfd):
+    test_string = MyList()
+    test_string.reassign(MyList("new string"))
+    test_string.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "newstring"
+
+
+def test_equals_operator_nonempty(capfd):
+    test_string = MyList("test")
+    test_string.reassign(MyList("new string"))
+    test_string.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "newstring"
+
+
+def test_equals_operator_nonempty_mem_check(capfd):
+    test_string = MyList("test")
+    test_str2   = MyList("new string")
+    test_string.reassign(test_str2)
+    test_str2.pop_back()
+    test_string.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == "newstring"
+
+def test_addition_operator_a_empty_b_empty():
+    test_str  = MyList()
+    test_str2 = MyList()
+    test_str3 = test_str + test_str2
+    assert test_str.size() == 0
+
+def test_addition_operator_a_empty_b_nonempty():
+    test_str  = MyList()
+    test_str2 = MyList("123")
+    test_str3 = test_str + test_str2
+    assert test_str.size() == 3
+
+def test_addition_operator_a_nonempty_b_nonempty(capfd):
+    test_str  = MyList("abc")
+    test_str2 = MyList("def")
+    test_str3 = test_str + test_str2
+    test_str3.print_list()
+
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+
+    assert only_chars == "abcdef"
+
+def test_addition_operator_a_nonempty_b_empty():
+    test_str  = MyList("123")
+    test_str2 = MyList()
+    test_str3 = test_str + test_str2
+    assert test_str.size() == 3
+
+def test_addition_operator_mem_check():
+    test_str  = MyList("abc")
+    test_str2 = MyList("def")
+    test_str3 = test_str + test_str2
+
+    test_str2.pop_back()
+
+    test_str3.print_list()
+
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+
+    assert only_chars == "abcdef"
+
 
 # print
-def test_print(capsys):
+def test_print(capfd):
     test_output = MyList("testoutput")
     test_output.print_list()
     out, err = capfd.readouterr()
