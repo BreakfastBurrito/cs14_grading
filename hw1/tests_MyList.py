@@ -99,7 +99,7 @@ def test_pop_back_empty(capsys):
 
 # pop_back empty
 def test_pop_back_nonempty(capsys):
-    test_popb = MyList(popping")
+    test_popb = MyList("popping")
     for _ in xrange(4):
         test_popb.pop_back()
 
