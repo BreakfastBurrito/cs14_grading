@@ -10,14 +10,14 @@ def test_default_constructor():
 def test_copy_constructor_len():
     copy_from = MyList("original")
     copy_to = MyList(copy_from)
-    assert len(copy_from) == 8 and len(copy_to) == 8
+    assert copy_from.size() == 8 and copy_to.size() == 8
 
 # copy constructor
 def test_copy_constructor_diff():
     copy_from = MyList("original")
     copy_to = MyList(copy_from)
     copy_to.push_front('a')
-    assert copy_from.size() == 9 and copy_to.size() == 8
+    assert copy_from.size() == 8 and copy_to.size() == 9
 
 # Test string constructor
 def test_string_constructor():
