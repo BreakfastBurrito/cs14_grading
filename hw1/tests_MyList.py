@@ -34,7 +34,7 @@ def test_string_constructor():
 def test_push_front_nonempty(capfd):
     test_pf = MyList("world")
     for ch in "elloh":
-        push_front(ch)
+        test_pf.push_front(ch)
 
     test_pf.print_list()
     out, err = capfd.readouterr()
@@ -45,7 +45,7 @@ def test_push_front_nonempty(capfd):
 def test_push_front_empty(capfd):
     test_pf = MyList()
     for ch in "elloh":
-        push_front(ch)
+        test_pf.push_front(ch)
 
     test_pf.print_list()
     out, err = capfd.readouterr()
@@ -78,7 +78,10 @@ def test_push_back_empty(capfd):
 def test_pop_front_empty(capfd):
     test_popf = MyList()
     test_popf.pop_front()
-    assert only_chars == "ping"
+    test_popf.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == ""
 
 # pop_front on empty
 def test_pop_front_nonempty(capfd):
@@ -95,7 +98,10 @@ def test_pop_front_nonempty(capfd):
 def test_pop_back_empty(capfd):
     test_popb = MyList()
     test_popb.pop_back()
-    assert only_chars == "pop"
+    test_popb.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == ""
 
 # pop_back empty
 def test_pop_back_nonempty(capfd):
@@ -113,7 +119,7 @@ def test_swap_both_valid(capfd):
     swap_me = MyList("swap")
     swap_me.swap(1,2)
 
-    test_rev.print_list()
+    swap_me.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "sawp"
@@ -123,7 +129,7 @@ def test_swap_invalid_i(capfd):
     swap_me = MyList("swap")
     swap_me.swap(8,2)
 
-    test_rev.print_list()
+    swap_me.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "swap"
@@ -133,7 +139,7 @@ def test_swap_invalid_j(capfd):
     swap_me = MyList("swap")
     swap_me.swap(1,10)
 
-    test_rev.print_list()
+    swap_me.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "swap"
@@ -143,7 +149,7 @@ def test_swap_both_invalid(capfd):
     swap_me = MyList("swap")
     swap_me.swap(-1,200)
 
-    test_rev.print_list()
+    swap_me.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "swap"
@@ -152,6 +158,11 @@ def test_swap_both_invalid(capfd):
 def test_swap_on_empty(capfd):
     empty = MyList()
     empty(1, 2)
+    empty.print_list()
+    out, err = capfd.readouterr()
+    only_chars = "".join(re.findall('([a-z])', out))
+    assert only_chars == ""
+
 
 ## insert at valid i
 def test_insert_at_pos_valid(capfd):
@@ -163,7 +174,7 @@ def test_insert_at_pos_valid(capfd):
     assert only_chars == "teasting"
 
 # reverse nonempty
-def test_reverse(capfd):
+def test_reverse_nonempty(capfd):
     test_rev = MyList("reverse")
     test_rev.revese()
 
@@ -173,7 +184,7 @@ def test_reverse(capfd):
     assert only_chars == "esrever"
 
 # reverse empty
-def test_reverse(capfd):
+def test_reverse_empty(capfd):
     test_rev = MyList()
     test_rev.revese()
 
