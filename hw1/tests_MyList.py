@@ -17,15 +17,12 @@ def test_copy_constructor_diff():
     copy_from = MyList("original")
     copy_to = MyList(copy_from)
     copy_to.push_front('a')
-    assert len(copy_from) == 9 and len(copy_to) == 8
+    assert copy_from.size() == 9 and copy_to.size() == 8
 
 # Test string constructor
 def test_string_constructor():
     str_constructor = MyList("I am a string")
     assert str_constructor.size() == len("I am a string")
-
-## Test char* constructor
-#def test_char_constructor():
 
 ## destructor
 #def test_destructor():
@@ -33,7 +30,7 @@ def test_string_constructor():
 ## push_front on empty
 def test_push_front_nonempty(capfd):
     test_pf = MyList("world")
-    for ch in "elloh":
+    for ch in "olleh":
         test_pf.push_front(ch)
 
     test_pf.print_list()
@@ -41,10 +38,10 @@ def test_push_front_nonempty(capfd):
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "helloworld"
 
-# push_front non empty
+# push_front empty
 def test_push_front_empty(capfd):
     test_pf = MyList()
-    for ch in "elloh":
+    for ch in "olleh":
         test_pf.push_front(ch)
 
     test_pf.print_list()
@@ -52,7 +49,7 @@ def test_push_front_empty(capfd):
     only_chars = "".join(re.findall('([a-z])', out))
     assert only_chars == "hello"
 
-# push_back on empty
+# push_back on nonempty
 def test_push_back_nonempty(capfd):
     test_pb = MyList("hello")
     for ch in "world":
@@ -157,7 +154,7 @@ def test_swap_both_invalid(capfd):
 # swap on empty list
 def test_swap_on_empty(capfd):
     empty = MyList()
-    empty(1, 2)
+    empty.swap(1, 2)
     empty.print_list()
     out, err = capfd.readouterr()
     only_chars = "".join(re.findall('([a-z])', out))
@@ -176,7 +173,7 @@ def test_insert_at_pos_valid(capfd):
 # reverse nonempty
 def test_reverse_nonempty(capfd):
     test_rev = MyList("reverse")
-    test_rev.revese()
+    test_rev.reverse()
 
     test_rev.print_list()
     out, err = capfd.readouterr()
@@ -186,7 +183,7 @@ def test_reverse_nonempty(capfd):
 # reverse empty
 def test_reverse_empty(capfd):
     test_rev = MyList()
-    test_rev.revese()
+    test_rev.reverse()
 
     test_rev.print_list()
     out, err = capfd.readouterr()
@@ -204,7 +201,7 @@ def test_find_valid_char():
 
 def test_find_invalid_char():
     test_string = MyList("test string")
-    assert test_string.find_MyList("r") == -1
+    assert test_string.find_MyList("z") == -1
 
 def test_find_empty_list():
     test_string = MyList()
