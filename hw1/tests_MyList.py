@@ -31,7 +31,7 @@ def test_string_constructor():
 #def test_destructor():
 
 ## push_front on empty
-def test_push_front_empty(capsys):
+def test_push_front_nonempty(capsys):
     test_pf = MyList("world")
     for ch in "elloh":
         push_front(ch)
@@ -42,7 +42,7 @@ def test_push_front_empty(capsys):
     assert only_chars == "helloworld"
 
 # push_front non empty
-def test_push_front_nonempty(capsys):
+def test_push_front_empty(capsys):
     test_pf = MyList()
     for ch in "elloh":
         push_front(ch)
