@@ -31,7 +31,7 @@ def test_string_constructor():
 #def test_destructor():
 
 ## push_front on empty
-def test_push_front_nonempty(capsys):
+def test_push_front_nonempty(capfd):
     test_pf = MyList("world")
     for ch in "elloh":
         push_front(ch)
@@ -42,7 +42,7 @@ def test_push_front_nonempty(capsys):
     assert only_chars == "helloworld"
 
 # push_front non empty
-def test_push_front_empty(capsys):
+def test_push_front_empty(capfd):
     test_pf = MyList()
     for ch in "elloh":
         push_front(ch)
@@ -53,7 +53,7 @@ def test_push_front_empty(capsys):
     assert only_chars == "hello"
 
 # push_back on empty
-def test_push_back_nonempty(capsys):
+def test_push_back_nonempty(capfd):
     test_pb = MyList("hello")
     for ch in "world":
         test_pb.push_back(ch)
@@ -64,7 +64,7 @@ def test_push_back_nonempty(capsys):
     assert only_chars == "helloworld"
 
 # push_back on empty
-def test_push_back_empty(capsys):
+def test_push_back_empty(capfd):
     test_pb = MyList()
     for ch in "abc":
         test_pb.push_back(ch)
@@ -75,13 +75,13 @@ def test_push_back_empty(capsys):
     assert only_chars == "abc"
 
 # pop_front on empty
-def test_pop_front_empty(capsys):
+def test_pop_front_empty(capfd):
     test_popf = MyList()
     test_popf.pop_front()
     assert only_chars == "ping"
 
 # pop_front on empty
-def test_pop_front_nonempty(capsys):
+def test_pop_front_nonempty(capfd):
     test_popf = MyList("popping")
     for _ in xrange(3):
         test_popf.pop_front()
@@ -92,13 +92,13 @@ def test_pop_front_nonempty(capsys):
     assert only_chars == "ping"
 
 # pop_back empty
-def test_pop_back_empty(capsys):
+def test_pop_back_empty(capfd):
     test_popb = MyList()
     test_popb.pop_back()
     assert only_chars == "pop"
 
 # pop_back empty
-def test_pop_back_nonempty(capsys):
+def test_pop_back_nonempty(capfd):
     test_popb = MyList("popping")
     for _ in xrange(4):
         test_popb.pop_back()
@@ -109,7 +109,7 @@ def test_pop_back_nonempty(capsys):
     assert only_chars == "pop"
 
 # swap valid i valid j
-def test_swap_both_valid(capsys):
+def test_swap_both_valid(capfd):
     swap_me = MyList("swap")
     swap_me.swap(1,2)
 
@@ -119,7 +119,7 @@ def test_swap_both_valid(capsys):
     assert only_chars == "sawp"
 
 # swap invalid i valid j
-def test_swap_invalid_i(capsys):
+def test_swap_invalid_i(capfd):
     swap_me = MyList("swap")
     swap_me.swap(8,2)
 
@@ -129,7 +129,7 @@ def test_swap_invalid_i(capsys):
     assert only_chars == "swap"
 
 # swap valid i invalid j
-def test_swap_invalid_j(capsys):
+def test_swap_invalid_j(capfd):
     swap_me = MyList("swap")
     swap_me.swap(1,10)
 
@@ -139,7 +139,7 @@ def test_swap_invalid_j(capsys):
     assert only_chars == "swap"
 
 # swap both invalid
-def test_swap_both_invalid(capsys):
+def test_swap_both_invalid(capfd):
     swap_me = MyList("swap")
     swap_me.swap(-1,200)
 
@@ -163,7 +163,7 @@ def test_insert_at_pos_valid(capfd):
     assert only_chars == "teasting"
 
 # reverse nonempty
-def test_reverse(capsys):
+def test_reverse(capfd):
     test_rev = MyList("reverse")
     test_rev.revese()
 
@@ -173,7 +173,7 @@ def test_reverse(capsys):
     assert only_chars == "esrever"
 
 # reverse empty
-def test_reverse(capsys):
+def test_reverse(capfd):
     test_rev = MyList()
     test_rev.revese()
 
