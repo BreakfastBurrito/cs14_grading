@@ -25,12 +25,5 @@ do
   fi
 done
 
-#Fixes for sed osx
-export LC_CTYPE=C
-export LANG=C
-
-#Fixes class getter
-grep -rl -v "char& operator\[\]" ./* | grep -v cs14_grading | xargs -I{} sed -i '' s/char\&/char/ {}
-
 #Makes extensions uniform
-find . -iname "*.H$" -exec bash -c 'mv "$0" "${0%\.H}.h"' {} \;
+find . -iname "*.H" -exec bash -c 'mv "$0" "${0%\.H}.h"' {} \;
