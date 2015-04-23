@@ -26,4 +26,4 @@ do
 done
 
 #Makes extensions uniform
-find . -iname "*.H" -exec bash -c 'mv "$0" "${0%\.H}.h"' {} \;
+#find . -iname "*.H" -exec bash -c 'mv "$0" "${0%\.H}.h"' {} \;
