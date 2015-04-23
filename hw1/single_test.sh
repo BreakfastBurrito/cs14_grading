@@ -16,4 +16,4 @@ cmake -DPYTHON_LIBRARY=/usr/local/Cellar/python/2.7.9/Frameworks/Python.framewor
 make
 echo $? >> ../../passed
 
-py.test -v tests_MyList.py > tests.log
+py.test -v tests_MyList.py | cat
