@@ -3,9 +3,11 @@
 if [ "$#" -eq 0 ] || [ "$#" -gt 1 ]
 then
   echo "This script requires a single argument"
+  exit 1
 elif [ -f $1 ]
 then
   echo "This script takes only a directory as an argument"
+  exit 2
 fi
 
 cp cs14_grading/hw1/tests_MyList.py $1/build
