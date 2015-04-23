@@ -1,7 +1,9 @@
 from MyList import MyList, get_MyList
 import re
 import pytest
-xfail = pytest.mark.xfail(run=False)
+
+xfail = xfail = pytest.mark.xfail(run=False)
+
 # default constructor
 def test_default_constructor():
     def_constructor = get_MyList(MyList())
