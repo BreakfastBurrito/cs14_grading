@@ -1,6 +1,7 @@
 from MyList import MyList, get_MyList
 import re
-
+import pytest
+xfail = pytest.mark.xfail(run=False)
 # default constructor
 def test_default_constructor():
     def_constructor = get_MyList(MyList())
@@ -153,7 +154,7 @@ def test_find_empty_list():
 
 def test_find_valid_MyList():
     test_string = MyList("teststring")
-    assert test_string.find_MyList(MyList("rin")) == 6 
+    assert test_string.find_MyList(MyList("rin")) == 6
 
 def test_find_invalid_MyList():
     test_string = MyList("teststring")
