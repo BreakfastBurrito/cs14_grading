@@ -9,7 +9,7 @@ then
 fi
 
 cp cs14_grading/hw1/tests_MyList.py $1/build
-cp cs14_grading/hw1/{CmakeLists.txt,MyList.cpp} $1
+cp cs14_grading/hw1/{CmakeLists.txt,MyGradingList.cpp} $1
 
 cd $1/build
 cmake -DPYTHON_LIBRARY=/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib ../
