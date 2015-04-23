@@ -1,6 +1,8 @@
 #include <boost/python.hpp>
 #include <iostream>
+#define private public
 #include "MyList.h"
+#undef private
 
 using namespace boost::python;
 
@@ -11,6 +13,25 @@ void assignMyList(MyList& self, const MyList& other)
 {
     self = other;
 }
+
+std::string get_MyList(const MyList &l)
+{
+  std::string return_str;
+  Node *head = l.head;
+
+  if(head == NULL)
+    return return_str;
+
+	while(head->next != l.head)
+	{
+			return_str += head->value;
+			head = head->next;
+	}
+  return_str += head->value;
+
+  return return_str;
+}
+
 BOOST_PYTHON_MODULE(MyList)
 {
   class_<MyList>("MyList")
@@ -30,4 +51,5 @@ BOOST_PYTHON_MODULE(MyList)
       .def(self + self)
       .def("reassign", assignMyList);
       ;
+  def("get_MyList", get_MyList);
 }
