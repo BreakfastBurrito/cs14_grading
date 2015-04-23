@@ -277,7 +277,7 @@ def test_addition_operator_a_nonempty_b_empty():
     test_str3 = test_str + test_str2
     assert test_str.size() == 3
 
-def test_addition_operator_mem_check():
+def test_addition_operator_mem_check(capfd):
     test_str  = MyList("abc")
     test_str2 = MyList("def")
     test_str3 = test_str + test_str2
