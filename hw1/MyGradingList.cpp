@@ -6,8 +6,11 @@
 
 using namespace boost::python;
 
-int (MyList::*find1)(char) const = &MyList::find;
-int (MyList::*find2)(MyList::MyList&) const = &MyList::find;
+typedef int (MyList::*char_find)(char&) const;
+typedef int (MyList::*Mylist_find)(MyList&) const;
+
+char_find find1= &MyList::find;
+Mylist_find find2 = &MyList::find;
 
 void assignMyList(MyList& self, const MyList& other)
 {
@@ -36,7 +39,7 @@ BOOST_PYTHON_MODULE(MyList)
 {
   class_<MyList>("MyList")
       .def(init<std::string>())
-      .def(init<MyList::MyList>())
+      .def(init<const MyList::MyList>())
       .def("print_list", &MyList::print)
       .def("push_front", &MyList::push_front)
       .def("push_back", &MyList::push_back)
