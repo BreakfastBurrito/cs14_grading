@@ -39,7 +39,7 @@ BOOST_PYTHON_MODULE(MyList)
 {
   class_<MyList>("MyList")
       .def(init<std::string>())
-      .def(init<const MyList::MyList>())
+      .def(init<MyList::MyList>())
       .def("print_list", &MyList::print)
       .def("push_front", &MyList::push_front)
       .def("push_back", &MyList::push_back)
